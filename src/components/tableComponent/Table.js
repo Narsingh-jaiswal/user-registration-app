@@ -1,9 +1,12 @@
 import React from 'react'
+import "./Table.css"
 
 const Tablecomponent = () => {
-  return(
+  return (
     <>
-      <h1>Table</h1>
+      <div className="table-container">
+        <h1>Table</h1>
+      </div>
     </>
   )
 }
