@@ -8,7 +8,6 @@ function App() {
   return (
     <Router>
       <Navbar />
-
       <Switch>
         <Route exact path="/" component={Formcomponent}></Route>
         <Route path="/Contact" component={Tablecomponent}></Route>

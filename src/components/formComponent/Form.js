@@ -18,21 +18,27 @@ const Formcomponent = () => {
           <input
             value={user.name}
             className="form-input"
-            onChange={(e) => { }}
+            onChange={(e) => setUser({
+              ...user, name: e.target.value
+            })}
             placeholder="Your Name" />
 
           <label className="form-label">age</label>
           <input
             value={user.age}
             className="form-input"
-            onChange={(e) => { }}
+            onChange={(e) => setUser({
+              ...user, age: e.target.value
+            })}
             placeholder="21" />
 
           <label className="form-label">Contact</label>
           <input
             value={user.contact}
             className="form-input"
-            onChange={(e) => { }}
+            onChange={(e) => setUser({
+              ...user, contact: e.target.value
+            })}
             placeholder="8349322226" />
 
           <label className="form-label">email</label>
@@ -40,7 +46,9 @@ const Formcomponent = () => {
             value={user.email}
             className="form-input"
             type="email"
-            onChange={(e) => { }}
+            onChange={(e) => setUser({
+              ...user, email: e.target.value
+            })}
             placeholder="example.gmail.com" />
 
           <button className="form-submit-button" type="submit">Submit</button>

@@ -1,7 +1,5 @@
 .form-container {
-  width: 1000x;
-  margin: auto;
-  background-image: url();
+  margin: auto;  
   background-color: #ecf8f8;
   height: 646px;
 }
@@ -10,6 +8,7 @@
   text-align: center;
   color:#52b69a;
   font-family: cursive;
+  margin: 0%;
   margin-bottom: 0px;
   letter-spacing: 1px;
 }
