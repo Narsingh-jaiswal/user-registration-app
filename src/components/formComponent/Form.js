@@ -10,7 +10,7 @@ const Formcomponent = () => {
   })
 
   const [Validation, setValidation] = useState({
-    contactError: '',
+    contactValidation: '',
     ageValidation: ''
   })
 
@@ -22,7 +22,16 @@ const Formcomponent = () => {
     if (isNaN(event.target.value)) {
       setValidation({
         ...Validation,
-        contactError: 'only numbers accepted'
+        contactValidation: 'only numbers accepted'
+      })
+    } else if (user.contact.length >= 10) {
+      setValidation({
+        ...Validation,
+        contactValidation: 'out of range'
+      })
+      setUser({
+        ...user,
+        contact: parseInt(user.contact / 10),
       })
     } else {
       setValidation('')
@@ -75,7 +84,7 @@ const Formcomponent = () => {
             className="form-input"
             onChange={contactValidation}
             placeholder="8349322226" required />
-          <label className="error">{Validation.contactError}</label>
+          <label className="error">{Validation.contactValidation}</label>
 
           <label className="form-label">email</label>
           <input
