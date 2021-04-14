@@ -8,48 +8,84 @@ const Formcomponent = () => {
     email: '',
 
   })
+
+  const [Validation, setValidation] = useState({
+    contactError: '',
+    ageValidation: ''
+  })
+
+  const FormSubmit = (event) => {
+    event.preventDefault()
+  }
+
+  const contactValidation = (event) => {
+    if (isNaN(event.target.value)) {
+      setValidation({
+        ...Validation,
+        contactError: 'only numbers accepted'
+      })
+    } else {
+      setValidation('')
+      setUser({
+        ...user, contact: event.target.value.trimStart()
+      })
+    }
+  }
+
+  const ageValidation = (event) => {
+    if (isNaN(event.target.value)) {
+      setValidation({
+        ...Validation,
+        ageValidation: 'only numbers accepted'
+      })
+    } else {
+      setValidation('')
+      setUser({
+        ...user, age: event.target.value.trimStart()
+      })
+    }
+  }
+
   return (
     <>
       <div className="form-container">
         <h1 className="form-heading">Add User</h1>
         <h4 className="form-subheading">To your contact</h4>
-        <form className="main-form">
+        <form className="main-form" onSubmit={FormSubmit}>
           <label className="form-label">Name</label>
           <input
             value={user.name}
             className="form-input"
-            onChange={(e) => setUser({
-              ...user, name: e.target.value
+            onChange={(event) => setUser({
+              ...user, name: event.target.value.trimStart()
             })}
-            placeholder="Your Name" />
+            placeholder="Your Name" required />
 
           <label className="form-label">age</label>
           <input
             value={user.age}
             className="form-input"
-            onChange={(e) => setUser({
-              ...user, age: e.target.value
-            })}
-            placeholder="21" />
+            onChange={ageValidation}
+            placeholder="21" required />
+          <label className="error">{Validation.ageValidation}</label>
 
           <label className="form-label">Contact</label>
           <input
             value={user.contact}
             className="form-input"
-            onChange={(e) => setUser({
-              ...user, contact: e.target.value
-            })}
-            placeholder="8349322226" />
+            onChange={contactValidation}
+            placeholder="8349322226" required />
+          <label className="error">{Validation.contactError}</label>
 
           <label className="form-label">email</label>
           <input
             value={user.email}
             className="form-input"
             type="email"
-            onChange={(e) => setUser({
-              ...user, email: e.target.value
+            onChange={(event) => setUser({
+              ...user, email: event.target.value.trimStart()
             })}
-            placeholder="example.gmail.com" />
+            placeholder="example.gmail.com" required />
 
           <button className="form-submit-button" type="submit">Submit</button>
         </form>
