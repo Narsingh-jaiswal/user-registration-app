@@ -1,0 +1,23 @@
+.table-container {
+  margin: auto;
+}
+
+.main-table {
+  width: 80%;
+  margin: auto;
+  border-collapse: collapse;
+}
+
+.main-table-head {
+  border-bottom: 1px solid #cecece;
+  background-image: linear-gradient(90deg, #f78ca0, #f9748f 19%, #fd868c 60%, #fe9a8b) !important;
+}
+
+.table-head {
+  padding: 5px;
+  color: #fff;
+}
+
+.tbody {
+  border-bottom: 1px solid #cecece;
+}
