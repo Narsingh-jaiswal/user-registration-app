@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import registerUserAction from '../../redux-app/Action/registerUserAction'
 import "./Form.css"
 const Formcomponent = (props) => {
-  console.log(props.getstate.userData);
   const [user, setUser] = useState({
     name: '',
     age: '',
@@ -20,6 +19,12 @@ const Formcomponent = (props) => {
   const FormSubmit = (event) => {
     event.preventDefault()
     props.userRegistrationDispatch(user)
+    setUser({
+      name: '',
+      age: '',
+      contact: '',
+      email: '',
+    })
   }
 
   const contactValidation = (event) => {

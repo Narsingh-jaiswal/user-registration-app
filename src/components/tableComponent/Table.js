@@ -1,8 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
+import getUserReducer from '../../redux-app/Action/getUserAction';
 import "./Table.css"
 
-const Tablecomponent = () => {
-  const tabledata = []
+const Tablecomponent = (props) => {
+  const [tableData, setTableData] = useState()
+
+  useEffect(() => {
+    setTableData(props.dispatchGetUser())
+  }, [tableData])
+
+  const tabledata = props.getUser
   return (
     <>
       <div className="table-container">
@@ -14,6 +22,9 @@ const Tablecomponent = () => {
               </th>
               <th className="table-head">
                 Name
+              </th>
+              <th className="table-head">
+                age
               </th>
               <th className="table-head">
                 email
@@ -37,4 +48,39 @@ const Tablecomponent = () => {
     </>
   )
 }
-export default Tablecomponent
+
+const mapstatetoprops = (state) => ({
+  getUser: state.getUserReducer.map((element, index) => {
+    return (
+      <tr key={element.id}>
+        <td>
+          {index + 1}
+        </td>
+        <td>
+          {element.name}
+        </td>
+        <td>
+          {element.age}
+        </td>
+        <td>
+          {element.email}
+        </td>
+        <td>
+          {element.contact}
+        </td>
+        <td>
+          edit
+      </td>
+        <td>
+          delete
+      </td>
+      </tr>
+    )
+  })
+})
+
+const mapdispatchtoprops = (dispatch) => ({
+  dispatchGetUser: () => dispatch(getUserReducer())
+})
+
+export default connect(mapstatetoprops, mapdispatchtoprops)(Tablecomponent)
