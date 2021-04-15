@@ -34,7 +34,10 @@ const Formcomponent = () => {
         contact: parseInt(user.contact / 10),
       })
     } else {
-      setValidation('')
+      setValidation({
+        ...Validation,
+        contactValidation : ''
+      })
       setUser({
         ...user, contact: event.target.value.trimStart()
       })
