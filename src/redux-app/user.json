@@ -48,6 +48,13 @@
       "contact": "1233211233",
       "email": "Yash@gmail.com",
       "id": 7
+    },
+    {
+      "name": "pratik Yadav",
+      "age": "22",
+      "contact": "1233211231",
+      "email": "pratik@gmail.com",
+      "id": 8
     }
   ]
 }
