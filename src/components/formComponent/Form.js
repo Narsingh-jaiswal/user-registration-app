@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import registerUserAction from '../../redux-app/Action/registerUserAction'
 import "./Form.css"
-const Formcomponent = () => {
+const Formcomponent = (props) => {
+  console.log(props.getstate.userData);
   const [user, setUser] = useState({
     name: '',
     age: '',
@@ -16,6 +19,7 @@ const Formcomponent = () => {
 
   const FormSubmit = (event) => {
     event.preventDefault()
+    props.userRegistrationDispatch(user)
   }
 
   const contactValidation = (event) => {
@@ -36,7 +40,7 @@ const Formcomponent = () => {
     } else {
       setValidation({
         ...Validation,
-        contactValidation : ''
+        contactValidation: ''
       })
       setUser({
         ...user, contact: event.target.value.trimStart()
@@ -106,4 +110,14 @@ const Formcomponent = () => {
   )
 }
 
-export default Formcomponent
+const mapstatetoprops = (state) => ({
+  getstate: state
+})
+
+const mapdispatchtoprops = (dispatch) => ({
+  userRegistrationDispatch: (userData) => {
+    dispatch(registerUserAction(userData))
+  }
+})
+
+export default connect(mapstatetoprops, mapdispatchtoprops)(Formcomponent)
