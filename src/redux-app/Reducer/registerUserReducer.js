@@ -1,19 +1,22 @@
 import { userRegisterFail, userRegisterSuccess } from "../Constants";
 
 const initialState = {
-  userData: ''
+  userData: {},
+  Mode: ""
 }
 const registerUserReducer = (state = initialState, action) => {
   switch (action.type) {
     case userRegisterSuccess:
       return ({
         ...state,
-        userData: action.userData
+        userData: action.userData,
+        Mode: "Created"
       })
     case userRegisterFail:
       return ({
         ...state,
-        userData: action.userData
+        userData: action.userData,
+        Mode: "Fail to Create"
       })
     default:
       return state

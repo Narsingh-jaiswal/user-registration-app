@@ -1,0 +1,14 @@
+.snakbar-head {
+  text-align: center;
+  animation: snakbar 1s ease-in-out 0s 1;
+}
+
+@keyframes snakbar {
+  from {
+    transform: translateY(50px);
+  }
+
+  to {
+    transform: translateY(0px);
+  }
+}

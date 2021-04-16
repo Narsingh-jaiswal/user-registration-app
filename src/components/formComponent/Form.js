@@ -1,24 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { updateUser, cancelEdit } from '../../redux-app/Action/editAction'
-import registerUserAction from '../../redux-app/Action/registerUserAction'
+import registerUser from '../../redux-app/Action/registerUserAction'
 import "./Form.css"
 const Formcomponent = (props) => {
-
-  useEffect(() => {
-    if (props.Mode.type === "EditMode") {
-      setUser(props.Mode.data)
-    }
-    return () => {
-    }
-  }, [props.Mode.type, props.Mode.data])
-
   const [user, setUser] = useState({
     name: '',
     age: '',
     contact: '',
     email: '',
   })
+
+  useEffect(() => {
+    if (props.Mode.type === "EditMode")
+      setUser(props.Mode.data)
+    return () => {
+    }
+  }, [])
+
+  // if (props.Mode.type === "EditMode") {
+  //   setUser(props.Mode.data)
+  // }
 
   const [Validation, setValidation] = useState({
     contactValidation: '',
@@ -171,7 +173,7 @@ const mapstatetoprops = (state) => ({
 })
 
 const mapdispatchtoprops = (dispatch) => ({
-  userRegistrationDispatch: (userData) => dispatch(registerUserAction(userData)),
+  userRegistrationDispatch: (userData) => dispatch(registerUser(userData)),
   updateUser: (data) => dispatch(updateUser(data)),
   cancelEdit: () => dispatch(cancelEdit())
 })

@@ -1,6 +1,6 @@
 const Mode = {
   data: {},
-  Mode: "create"
+  Mode: ""
 }
 
 const editReducer = (state = Mode, action) => {
@@ -23,7 +23,7 @@ const editReducer = (state = Mode, action) => {
         data: action.data
       })
     case "cancel":
-      return({
+      return ({
         ...state,
         Mode: "cancel"
       })

@@ -1,6 +1,6 @@
 const deleteData = {
   data: {},
-  Status: {}
+  Mode: ""
 }
 
 const deleteReducer = (state = deleteData, action) => {
@@ -9,13 +9,13 @@ const deleteReducer = (state = deleteData, action) => {
       return ({
         ...state,
         data: action.userData,
-        Status: "Delete user"
+        Mode: "Delete user"
       })
     case "deletionFail":
       return ({
         ...state,
         data: action.userData,
-        status: "Deletion Fail"
+        Mode: "Deletion Fail"
       })
     default:
       return state

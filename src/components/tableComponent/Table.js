@@ -10,7 +10,6 @@ const Tablecomponent = (props) => {
   useEffect(() => {
     props.dispatchGetUser()
   }, [])
-
   const tabledata = props.getUser.map((element, index) => {
     return (
       <tr key={element.id}>
@@ -34,7 +33,7 @@ const Tablecomponent = (props) => {
             className="table-action-button"
             onClick={() => props.dispatEditUser(element)}>
             edit
-            </Link>
+          </Link>
         </td>
         <td>
           <button
@@ -44,7 +43,7 @@ const Tablecomponent = (props) => {
               props.dispatchGetUser()
             }}>
             delete
-            </button>
+          </button>
         </td>
       </tr>
     )
