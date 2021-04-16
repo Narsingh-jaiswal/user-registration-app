@@ -1,0 +1,53 @@
+{
+  "user": [
+    {
+      "name": "chetan singare",
+      "age": "22",
+      "contact": "123321",
+      "email": "chetan@singare",
+      "id": 2
+    },
+    {
+      "name": "Harsh Jaiswal",
+      "age": "20",
+      "contact": "7869284148",
+      "email": "harsh@gmail.com",
+      "id": 3
+    },
+    {
+      "name": "Dheeraj",
+      "age": "19",
+      "contact": "123321123",
+      "email": "dheeraj@gmail.com",
+      "id": 4
+    },
+    {
+      "name": "goldy",
+      "age": "22",
+      "contact": "123321123",
+      "email": "goldy@gmail.com",
+      "id": 5
+    },
+    {
+      "name": "Akshay Tiwari",
+      "age": "22",
+      "contact": "1233211231",
+      "email": "Akshay@gmail.com",
+      "id": 6
+    },
+    {
+      "name": "Yash Jaiswal",
+      "age": "15",
+      "contact": "1233211233",
+      "email": "Yash@gmail.com",
+      "id": 7
+    },
+    {
+      "name": "pratik Yadav",
+      "age": "22",
+      "contact": "1233211231",
+      "email": "pratik@gmail.com",
+      "id": 8
+    }
+  ]
+}
