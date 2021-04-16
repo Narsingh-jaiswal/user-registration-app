@@ -10,11 +10,11 @@ const Tablecomponent = (props) => {
     props.dispatchGetUser()
   }, [])
 
-  const tabledata = props.getUser.map((element) => {
+  const tabledata = props.getUser.map((element, index) => {
     return (
       <tr key={element.id}>
         <td>
-          <p>{element.id}</p>
+          <p>{index + 1}</p>
         </td>
         <td>
           <p>{element.name}</p>
