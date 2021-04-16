@@ -11,7 +11,16 @@ const editReducer = (state = Mode, action) => {
         Mode: action.type,
         data: action.data
       })
-
+    case "userEdited":
+      return ({
+        ...state,
+        data: action.data
+      })
+    case "userEditedFailed":
+      return ({
+        ...state,
+        data: action.data
+      })
     default:
       return state
   }

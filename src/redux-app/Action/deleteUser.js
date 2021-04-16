@@ -3,10 +3,16 @@ import axios from "axios"
 const deleteAction = (userData) => (dispatch) => {
   axios.delete(`http://localhost:8000/user/${userData.id}`).then(
     (deletedUser) => {
-      console.log("deleted");
+      dispatch({
+        type: "deleted",
+        userData: deletedUser.data
+      })
     },
     (failtodelete) => {
-      console.log("fail to delete");
+      dispatch({
+        type: "deletionFail",
+        userData: failtodelete.message
+      })
     }
   )
 }
