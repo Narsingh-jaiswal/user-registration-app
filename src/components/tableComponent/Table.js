@@ -1,15 +1,42 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom';
+import { edit } from '../../redux-app/Action/editAction';
 import getUserReducer from '../../redux-app/Action/getUserAction';
 import "./Table.css"
 
 const Tablecomponent = (props) => {
-
   useEffect(() => {
     props.dispatchGetUser()
   }, [])
 
-  const tabledata = props.getUser
+  const tabledata = props.getUser.map((element) => {
+    return (
+      <tr key={element.id}>
+        <td>
+          <p>{element.id}</p>
+        </td>
+        <td>
+          <p>{element.name}</p>
+        </td>
+        <td>
+          <p>{element.age}</p>
+        </td>
+        <td>
+          <p>{element.email}</p>
+        </td>
+        <td>
+          <p>{element.contact}</p>
+        </td>
+        <td>
+          <Link to="/" className="table-action-button" onClick={() => props.dispatEditUser(element)}>edit</Link>
+        </td>
+        <td>
+          <button className="table-action-button">delete</button>
+        </td>
+      </tr>
+    )
+  })
   return (
     <>
       <div className="table-container">
@@ -49,37 +76,12 @@ const Tablecomponent = (props) => {
 }
 
 const mapstatetoprops = (state) => ({
-  getUser: state.getUserReducer.map((element, index) => {
-    return (
-      <tr key={element.id}>
-        <td>
-          {index + 1}
-        </td>
-        <td>
-          {element.name}
-        </td>
-        <td>
-          {element.age}
-        </td>
-        <td>
-          {element.email}
-        </td>
-        <td>
-          {element.contact}
-        </td>
-        <td>
-          edit
-      </td>
-        <td>
-          delete
-      </td>
-      </tr>
-    )
-  })
+  getUser: state.getUserReducer
 })
 
 const mapdispatchtoprops = (dispatch) => ({
-  dispatchGetUser: () => dispatch(getUserReducer())
+  dispatchGetUser: () => dispatch(getUserReducer()),
+  dispatEditUser: (data) => dispatch(edit(data))
 })
 
 export default connect(mapstatetoprops, mapdispatchtoprops)(Tablecomponent)

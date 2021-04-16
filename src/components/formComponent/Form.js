@@ -1,14 +1,23 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
+import { updateUser, cancelEdit } from '../../redux-app/Action/editAction'
 import registerUserAction from '../../redux-app/Action/registerUserAction'
 import "./Form.css"
 const Formcomponent = (props) => {
+  console.log(props);
+  useEffect(() => {
+    if (props.Mode.type === "EditMode") {
+      setUser(props.Mode.data)
+    }
+    return () => {
+    }
+  }, [props.Mode.type, props.Mode.data])
+
   const [user, setUser] = useState({
     name: '',
     age: '',
     contact: '',
     email: '',
-
   })
 
   const [Validation, setValidation] = useState({
@@ -107,8 +116,27 @@ const Formcomponent = (props) => {
               ...user, email: event.target.value.trimStart()
             })}
             placeholder="example.gmail.com" required />
-
-          <button className="form-submit-button" type="submit">Submit</button>
+          {
+            props.Mode.type !== "EditMode" &&
+            <button className="form-submit-button" type="submit">Submit</button>
+          }
+          {
+            props.Mode.type === "EditMode" &&
+            <>
+              <button
+                className="form-submit-button"
+                type="submit"
+                onClick={() => props.updateUser(user)}>
+                Update
+              </button>
+              <button
+                className="form-submit-button"
+                type="submit"
+                onClick={() => cancelEdit()}>
+                Cancel
+              </button>
+            </>
+          }
         </form>
       </div>
     </>
@@ -116,13 +144,17 @@ const Formcomponent = (props) => {
 }
 
 const mapstatetoprops = (state) => ({
-  getstate: state
+  getstate: state,
+  Mode: {
+    type: state.editReducer.Mode,
+    data: state.editReducer.data
+  }
 })
 
 const mapdispatchtoprops = (dispatch) => ({
-  userRegistrationDispatch: (userData) => {
-    dispatch(registerUserAction(userData))
-  }
+  userRegistrationDispatch: (userData) => dispatch(registerUserAction(userData)),
+  updateUser: (data) => dispatch(updateUser(data)),
+  cancelEdit: () => dispatch(cancelEdit())
 })
 
 export default connect(mapstatetoprops, mapdispatchtoprops)(Formcomponent)

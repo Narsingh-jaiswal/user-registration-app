@@ -6,6 +6,12 @@
   width: 80%;
   margin: auto;
   border-collapse: collapse;
+  font-family: sans-serif;  
+}
+
+.main-table tr{  
+  border: 1px solid #cecece;
+  border-top: none;
 }
 
 .main-table-head {
@@ -21,4 +27,15 @@
 
 .tbody {
   border-bottom: 1px solid #cecece;
+}
+
+.table-action-button {
+  background-color: transparent;
+  border: 1px solid #cecece;
+  padding: 5px;
+  min-width: 50px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
 }
