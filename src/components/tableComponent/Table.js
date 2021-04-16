@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
+import deleteAction from '../../redux-app/Action/deleteUser';
 import { edit } from '../../redux-app/Action/editAction';
 import getUserReducer from '../../redux-app/Action/getUserAction';
 import "./Table.css"
@@ -29,10 +30,18 @@ const Tablecomponent = (props) => {
           <p>{element.contact}</p>
         </td>
         <td>
-          <Link to="/" className="table-action-button" onClick={() => props.dispatEditUser(element)}>edit</Link>
+          <Link to="/"
+            className="table-action-button"
+            onClick={() => props.dispatEditUser(element)}>
+            edit
+            </Link>
         </td>
         <td>
-          <button className="table-action-button">delete</button>
+          <button
+            className="table-action-button"
+            onClick={() => props.dispatchDeleteUser(element)}>
+            delete
+            </button>
         </td>
       </tr>
     )
@@ -81,7 +90,8 @@ const mapstatetoprops = (state) => ({
 
 const mapdispatchtoprops = (dispatch) => ({
   dispatchGetUser: () => dispatch(getUserReducer()),
-  dispatEditUser: (data) => dispatch(edit(data))
+  dispatEditUser: (userData) => dispatch(edit(userData)),
+  dispatchDeleteUser: (userData) => dispatch(deleteAction(userData))
 })
 
 export default connect(mapstatetoprops, mapdispatchtoprops)(Tablecomponent)
