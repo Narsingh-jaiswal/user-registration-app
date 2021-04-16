@@ -4,7 +4,7 @@ import { updateUser, cancelEdit } from '../../redux-app/Action/editAction'
 import registerUserAction from '../../redux-app/Action/registerUserAction'
 import "./Form.css"
 const Formcomponent = (props) => {
-  console.log(props);
+
   useEffect(() => {
     if (props.Mode.type === "EditMode") {
       setUser(props.Mode.data)
@@ -76,6 +76,26 @@ const Formcomponent = (props) => {
     }
   }
 
+  const onCancel = () => {
+    props.cancelEdit()
+    setUser({
+      name: '',
+      age: '',
+      contact: '',
+      email: '',
+    })
+  }
+
+  const onUpdate = () => {
+    props.updateUser(user)
+    setUser({
+      name: '',
+      age: '',
+      contact: '',
+      email: '',
+    })
+  }
+
   return (
     <>
       <div className="form-container">
@@ -124,15 +144,14 @@ const Formcomponent = (props) => {
             props.Mode.type === "EditMode" &&
             <>
               <button
+                type='button'
                 className="form-submit-button"
-                type="submit"
-                onClick={() => props.updateUser(user)}>
+                onClick={onUpdate}>
                 Update
               </button>
               <button
                 className="form-submit-button"
-                type="submit"
-                onClick={() => cancelEdit()}>
+                onClick={onCancel}>
                 Cancel
               </button>
             </>

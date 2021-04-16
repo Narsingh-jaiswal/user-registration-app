@@ -14,12 +14,18 @@ const editReducer = (state = Mode, action) => {
     case "userEdited":
       return ({
         ...state,
+        Mode: "Edited",
         data: action.data
       })
     case "userEditedFailed":
       return ({
         ...state,
         data: action.data
+      })
+    case "cancel":
+      return({
+        ...state,
+        Mode: "cancel"
       })
     default:
       return state

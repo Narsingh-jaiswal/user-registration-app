@@ -21,7 +21,6 @@ export const edit = (data) => ({
   data: data
 })
 
-export const cancelEdit = (data) => ({
-  type: "cancel",
-  data: data
+export const cancelEdit = () => ({
+  type: "cancel"
 })

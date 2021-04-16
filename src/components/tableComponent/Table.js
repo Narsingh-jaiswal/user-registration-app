@@ -39,7 +39,10 @@ const Tablecomponent = (props) => {
         <td>
           <button
             className="table-action-button"
-            onClick={() => props.dispatchDeleteUser(element)}>
+            onClick={() => {
+              props.dispatchDeleteUser(element)
+              props.dispatchGetUser()
+            }}>
             delete
             </button>
         </td>
