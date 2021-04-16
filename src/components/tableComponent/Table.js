@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import getUserReducer from '../../redux-app/Action/getUserAction';
 import "./Table.css"
 
 const Tablecomponent = (props) => {
-  const [tableData, setTableData] = useState()
 
   useEffect(() => {
-    setTableData(props.dispatchGetUser())
-  }, [tableData])
+    props.dispatchGetUser()
+  }, [])
 
   const tabledata = props.getUser
   return (
