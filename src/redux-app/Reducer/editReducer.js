@@ -1,3 +1,5 @@
+import { cancel, EditMode, userEdited, userEditedFailed } from "../Constants"
+
 const Mode = {
   data: {},
   Mode: ""
@@ -5,28 +7,25 @@ const Mode = {
 
 const editReducer = (state = Mode, action) => {
   switch (action.type) {
-    case "EditMode":
+    case EditMode:
       return ({
         ...state,
         Mode: action.type,
         data: action.data
       })
-    case "userEdited":
+    case userEdited:
       return ({
         ...state,
         Mode: "Edited",
         data: action.data
       })
-    case "userEditedFailed":
+    case userEditedFailed:
       return ({
         ...state,
         data: action.data
       })
-    case "cancel":
-      return ({
-        ...state,
-        Mode: "cancel"
-      })
+    case cancel:
+      return Mode
     default:
       return state
   }

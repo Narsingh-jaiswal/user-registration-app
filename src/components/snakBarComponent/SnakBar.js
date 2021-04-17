@@ -1,31 +1,45 @@
-// import React, { useEffect, useState } from 'react'
-// import { connect } from 'react-redux'
-// import "./Snakbar.css"
-// const Snakbar = (props) => {
-//   const [Status, setStatus] = useState({
-//     deleteReducer: props.getState.deleteReducer.Mode,
-//     editReducer: props.getState.editReducer.Mode,
-//     registerUserReducer: props.getState.registerUserReducer.Mode
-//   })
+import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
+import "./Snakbar.css"
 
-//   useEffect(() =>
-//     () => {
-//       return setTimeout(() =>console.log('end of snakbar'), 3000);
-//     })
+const Snakbar = (props) => {
+  const [Display, setDisplay] = useState(false)
+  useEffect(() => {
+    let timer
+    if (props.getState.appStatus.length > 0) {
+      setDisplay(true)
+      timer = setTimeout(dontshow, 3000)
+    }
+    return () => {
+      setDisplay(false)
+      clearTimeout(timer)
+    }
+  }, [props.getState.appStatus.length])
 
-//   return (
-//     <>
-//       <div className="snakbar-head">
-//         <h1>{Status.deleteReducer}</h1>
-//         <h1>{Status.editReducer}</h1>
-//         <h1>{Status.registerUserReducer}</h1>
-//       </div>
-//     </>
-//   )
-// }
+  const dontshow = () => {
+    props.clear()
+    setDisplay(false);
+  }
+  return (
+    <>
+      { Display &&
+        <>
+          <div className="snakbarcontainer">
+            <button onClick={dontshow} className="closebutton">&#10008;</button>
+            <h4 className="h1class">{props.getState.appStatus}</h4>
+          </div>
+        </>
+      }
+    </>
+  )
+}
 
-// const mapstatetoprops = (state) => ({
-//   getState: state
-// })
+const mapstatetoprops = (state) => ({
+  getState: state
+})
 
-// export default connect(mapstatetoprops, null)(Snakbar)
+const mapdispatchtoprops = (dispatch) => ({
+  clear: () => dispatch({ type: "clean" })
+})
+
+export default connect(mapstatetoprops, mapdispatchtoprops)(Snakbar)

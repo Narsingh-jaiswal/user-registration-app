@@ -3,15 +3,14 @@ import { getRegisteredUser } from "../Constants";
 
 const getUserReducer = () => (dispatch) => {
   axios.get("http://localhost:8000/user").then(
-    (user) => {      
+    (user) => {
       const users = user.data
       dispatch({
         type: getRegisteredUser,
-        userdata : users
+        userdata: users
       })
     },
     (error) => {
-      console.log(error);
     }
   )
 }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { updateUser, cancelEdit } from '../../redux-app/Action/editAction'
 import registerUser from '../../redux-app/Action/registerUserAction'
+import SnakBar from '../snakBarComponent/SnakBar'
 import "./Form.css"
 const Formcomponent = (props) => {
   const [user, setUser] = useState({
@@ -15,13 +16,9 @@ const Formcomponent = (props) => {
     if (props.Mode.type === "EditMode")
       setUser(props.Mode.data)
     return () => {
+      props.clear()
     }
   }, [])
-
-  // if (props.Mode.type === "EditMode") {
-  //   setUser(props.Mode.data)
-  // }
-
   const [Validation, setValidation] = useState({
     contactValidation: '',
     ageValidation: ''
@@ -29,13 +26,17 @@ const Formcomponent = (props) => {
 
   const FormSubmit = (event) => {
     event.preventDefault()
-    props.userRegistrationDispatch(user)
-    setUser({
-      name: '',
-      age: '',
-      contact: '',
-      email: '',
-    })
+    if (user.contact.length === 10) {
+      props.userRegistrationDispatch(user)
+      setUser({
+        name: '',
+        age: '',
+        contact: '',
+        email: '',
+      })
+    } else {
+      setValidation({ ...Validation, contactValidation: "contact number should contain 10 digits" })
+    }
   }
 
   const contactValidation = (event) => {
@@ -159,6 +160,7 @@ const Formcomponent = (props) => {
             </>
           }
         </form>
+        <SnakBar />
       </div>
     </>
   )
@@ -168,14 +170,16 @@ const mapstatetoprops = (state) => ({
   getstate: state,
   Mode: {
     type: state.editReducer.Mode,
-    data: state.editReducer.data
+    data: state.editReducer.data,
+    status: state.editReducer.status
   }
 })
 
 const mapdispatchtoprops = (dispatch) => ({
   userRegistrationDispatch: (userData) => dispatch(registerUser(userData)),
   updateUser: (data) => dispatch(updateUser(data)),
-  cancelEdit: () => dispatch(cancelEdit())
+  cancelEdit: () => dispatch(cancelEdit()),
+  clear: () => dispatch({ type: "clean" })
 })
 
 export default connect(mapstatetoprops, mapdispatchtoprops)(Formcomponent)

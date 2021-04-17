@@ -1,22 +1,21 @@
+import { deleted, deletionFail } from "../Constants"
+
 const deleteData = {
-  data: {},
-  Mode: ""
+  data: {}
 }
 
 const deleteReducer = (state = deleteData, action) => {
   switch (action.type) {
-    case "deleted":
+    case deleted:
+      return ({
+        ...state,
+        data: action.userData
+      })
+    case deletionFail:
       return ({
         ...state,
         data: action.userData,
-        Mode: "Delete user"
-      })
-    case "deletionFail":
-      return ({
-        ...state,
-        data: action.userData,
-        Mode: "Deletion Fail"
-      })
+      })    
     default:
       return state
   }
