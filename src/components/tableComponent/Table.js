@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 import deleteAction from '../../redux-app/Action/deleteUser';
@@ -9,10 +9,9 @@ import "./Table.css"
 
 const Tablecomponent = (props) => {
   useEffect(() => {
-    props.dispatchGetUser('')
+    props.dispatchGetUser("")
     return () => props.clear()
   }, [])
-  console.log(props.getUser);
   const tabledata = props.getUser.map((element, index) => {
     return (
       <tr key={element.id}>
@@ -68,32 +67,76 @@ const Tablecomponent = (props) => {
                 </button>
               </th>
               <th className="table-head">
+                {
+                  (props.getState.sortStatus.previousSortBy === "name" && !props.getState.sortStatus.ascending) &&
+                  <img
+                    className="arrow-img"
+                    src="https://www.flaticon.com/svg/vstatic/svg/545/545678.svg?token=exp=1618688775~hmac=2cef2b3fbc1161f5752e66d5beb3d4f1"
+                    alt="ascending descending img url" />
+                }
                 <button
                   className="action-btn"
                   onClick={() => props.dispatchGetUser("name")}>
                   Name
                 </button>
+                {
+                  (props.getState.sortStatus.previousSortBy === "name" && props.getState.sortStatus.ascending) &&
+                  < img className="arrow-img" src={props.getState.sortStatus.imgUrl} alt="ascending descending img url" />
+                }
               </th>
               <th className="table-head">
+                {
+                  (props.getState.sortStatus.previousSortBy === "age" && !props.getState.sortStatus.ascending) &&
+                  <img
+                    className="arrow-img"
+                    src="https://www.flaticon.com/svg/vstatic/svg/545/545678.svg?token=exp=1618688775~hmac=2cef2b3fbc1161f5752e66d5beb3d4f1"
+                    alt="ascending descending img url" />
+                }
                 <button
                   className="action-btn"
                   onClick={() => props.dispatchGetUser("age")}>
                   age
                 </button>
+                {
+                  (props.getState.sortStatus.previousSortBy === "age" && props.getState.sortStatus.ascending) &&
+                  < img className="arrow-img" src={props.getState.sortStatus.imgUrl} alt="ascending descending img url" />
+                }
               </th>
               <th className="table-head">
+                {
+                  (props.getState.sortStatus.previousSortBy === "email" && !props.getState.sortStatus.ascending) &&
+                  <img
+                    className="arrow-img"
+                    src="https://www.flaticon.com/svg/vstatic/svg/545/545678.svg?token=exp=1618688775~hmac=2cef2b3fbc1161f5752e66d5beb3d4f1"
+                    alt="ascending descending img url" />
+                }
                 <button
                   className="action-btn"
                   onClick={() => props.dispatchGetUser("email")}>
                   email
                 </button>
+                {
+                  (props.getState.sortStatus.previousSortBy === "email" && props.getState.sortStatus.ascending) &&
+                  < img className="arrow-img" src={props.getState.sortStatus.imgUrl} alt="ascending descending img url" />
+                }
               </th>
               <th className="table-head">
+                {
+                  (props.getState.sortStatus.previousSortBy === "contact" && !props.getState.sortStatus.ascending) &&
+                  <img
+                    className="arrow-img"
+                    src="https://www.flaticon.com/svg/vstatic/svg/545/545678.svg?token=exp=1618688775~hmac=2cef2b3fbc1161f5752e66d5beb3d4f1"
+                    alt="ascending descending img url" />
+                }
                 <button
                   className="action-btn"
                   onClick={() => props.dispatchGetUser("contact")}>
                   contact
                 </button>
+                {
+                  (props.getState.sortStatus.previousSortBy === "contact" && props.getState.sortStatus.ascending) &&
+                  < img className="arrow-img" src={props.getState.sortStatus.imgUrl} alt="ascending descending img url" />
+                }
               </th>
               <th className="table-head">
                 <button

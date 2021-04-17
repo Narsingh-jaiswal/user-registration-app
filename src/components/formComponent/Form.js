@@ -167,11 +167,9 @@ const Formcomponent = (props) => {
 }
 
 const mapstatetoprops = (state) => ({
-  getstate: state,
   Mode: {
     type: state.editReducer.Mode,
     data: state.editReducer.data,
-    status: state.editReducer.status
   }
 })
 
