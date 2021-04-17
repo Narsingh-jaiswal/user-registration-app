@@ -1,17 +1,18 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 import deleteAction from '../../redux-app/Action/deleteUser';
 import { edit } from '../../redux-app/Action/editAction';
-import getUserReducer from '../../redux-app/Action/getUserAction';
+import getUserAction from '../../redux-app/Action/getUserAction';
 import Snakbar from "./../snakBarComponent/SnakBar";
 import "./Table.css"
 
 const Tablecomponent = (props) => {
   useEffect(() => {
-    props.dispatchGetUser()
+    props.dispatchGetUser('')
     return () => props.clear()
   }, [])
+  console.log(props.getUser);
   const tabledata = props.getUser.map((element, index) => {
     return (
       <tr key={element.id}>
@@ -60,25 +61,51 @@ const Tablecomponent = (props) => {
           <thead className="main-table-head">
             <tr>
               <th className="table-head">
-                <p className="table-data">#</p>
+                <button
+                  className="action-btn"
+                  onClick={() => props.dispatchGetUser("")}>
+                  #
+                </button>
               </th>
               <th className="table-head">
-                <p className="table-data">Name</p>
+                <button
+                  className="action-btn"
+                  onClick={() => props.dispatchGetUser("name")}>
+                  Name
+                </button>
               </th>
               <th className="table-head">
-                <p className="table-data">age</p>
+                <button
+                  className="action-btn"
+                  onClick={() => props.dispatchGetUser("age")}>
+                  age
+                </button>
               </th>
               <th className="table-head">
-                <p className="table-data">email</p>
+                <button
+                  className="action-btn"
+                  onClick={() => props.dispatchGetUser("email")}>
+                  email
+                </button>
               </th>
               <th className="table-head">
-                <p className="table-data">contact</p>
+                <button
+                  className="action-btn"
+                  onClick={() => props.dispatchGetUser("contact")}>
+                  contact
+                </button>
               </th>
               <th className="table-head">
-                <p className="action-btn">edit</p>
+                <button
+                  className="action-btn">
+                  edit
+                </button>
               </th>
               <th className="table-head">
-                <p className="action-btn">delete</p>
+                <button
+                  className="action-btn">
+                  delete
+                </button>
               </th>
             </tr>
           </thead>
@@ -98,7 +125,7 @@ const mapstatetoprops = (state) => ({
 })
 
 const mapdispatchtoprops = (dispatch) => ({
-  dispatchGetUser: () => dispatch(getUserReducer()),
+  dispatchGetUser: (sortBy) => dispatch(getUserAction(sortBy)),
   dispatEditUser: (userData) => dispatch(edit(userData)),
   dispatchDeleteUser: (userData) => dispatch(deleteAction(userData)),
   clear: () => dispatch({ type: "clean" })
