@@ -1,40 +1,20 @@
 import axios from "axios"
 import { getRegisteredUser } from "../Constants";
 
-const compareFunctionbyName = (first, second) => {
-  if (first.name > second.name) {
+const ascendingCompareFunction = (first, second) => {
+  if (first > second) {
     return -1
-  } else if (first.name < second.name) {
+  } else if (first < second) {
     return 1
   } else {
     return 0
   }
 }
 
-const compareFunctionbyemail = (first, second) => {
-  if (first.email > second.email) {
-    return -1
-  } else if (first.email < second.email) {
+const descendingCompareFunction = (first, second) => {
+  if (first > second) {
     return 1
-  } else {
-    return 0
-  }
-}
-
-const DesccompareFunctionbyName = (first, second) => {
-  if (first.name > second.name) {
-    return 1
-  } else if (first.name < second.name) {
-    return -1
-  } else {
-    return 0
-  }
-}
-
-const DesccompareFunctionbyemail = (first, second) => {
-  if (first.email > second.email) {
-    return 1
-  } else if (first.email < second.email) {
+  } else if (first < second) {
     return -1
   } else {
     return 0
@@ -42,43 +22,26 @@ const DesccompareFunctionbyemail = (first, second) => {
 }
 
 const getUserAction = (SortBy) => (dispatch, getState) => {
-  console.log(SortBy.valueOf());
   axios.get("http://localhost:8000/user").then(
     (user) => {
       const users = user.data
       const sortStatus = getState().sortStatus
       const Ascending = () => {
-        switch (SortBy) {
-          case "name":
-            dispatch({
-              type: getRegisteredUser,
-              userdata: users.sort((first, second) => compareFunctionbyName(first, second))
-            })
-            break;
-          case "age":
-            dispatch({
-              type: getRegisteredUser,
-              userdata: users.sort((min, max) => min.age - max.age)
-            })
-            break
-          case "contact":
-            dispatch({
-              type: getRegisteredUser,
-              userdata: users.sort((min, max) => min.contact - max.contact)
-            })
-            break
-          case "email":
-            dispatch({
-              type: getRegisteredUser,
-              userdata: users.sort((first, second) => compareFunctionbyemail(first, second))
-            })
-            break
-          default:
-            dispatch({
-              type: getRegisteredUser,
-              userdata: users
-            })
-            break;
+        if (SortBy === "name" || SortBy === "email") {
+          dispatch({
+            type: getRegisteredUser,
+            userdata: users.sort((first, second) => ascendingCompareFunction(first[SortBy], second[SortBy]))
+          })
+        } else if (SortBy === "age" || SortBy === "contact") {
+          dispatch({
+            type: getRegisteredUser,
+            userdata: users.sort((min, max) => min[SortBy] - max[SortBy])
+          })
+        } else {
+          dispatch({
+            type: getRegisteredUser,
+            userdata: users
+          })
         }
       }
       if (sortStatus.previousSortBy !== SortBy) {
@@ -89,7 +52,6 @@ const getUserAction = (SortBy) => (dispatch, getState) => {
           ascendingValue: false
         })
       } else {
-        console.log("else chala");
         if (sortStatus.ascending) {
           Ascending()
           dispatch({
@@ -98,37 +60,21 @@ const getUserAction = (SortBy) => (dispatch, getState) => {
             ascendingValue: !sortStatus.ascending
           })
         } else {
-          switch (SortBy) {
-            case "name":
-              dispatch({
-                type: getRegisteredUser,
-                userdata: users.sort((first, second) => DesccompareFunctionbyName(first, second))
-              })
-              break;
-            case "age":
-              dispatch({
-                type: getRegisteredUser,
-                userdata: users.sort((min, max) => max.age - min.age)
-              })
-              break
-            case "contact":
-              dispatch({
-                type: getRegisteredUser,
-                userdata: users.sort((min, max) => max.contact - min.contact)
-              })
-              break
-            case "email":
-              dispatch({
-                type: getRegisteredUser,
-                userdata: users.sort((first, second) => DesccompareFunctionbyemail(first, second))
-              })
-              break
-            default:
-              dispatch({
-                type: getRegisteredUser,
-                userdata: users
-              })
-              break;
+          if (SortBy === "name" || SortBy === "email") {
+            dispatch({
+              type: getRegisteredUser,
+              userdata: users.sort((first, second) => descendingCompareFunction(first[SortBy], second[SortBy]))
+            })
+          } else if (SortBy === "age" || SortBy === "contact") {
+            dispatch({
+              type: getRegisteredUser,
+              userdata: users.sort((min, max) => max[SortBy] - min[SortBy])
+            })
+          } else {
+            dispatch({
+              type: getRegisteredUser,
+              userdata: users
+            })
           }
         }
         dispatch({

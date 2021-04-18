@@ -6,7 +6,7 @@ const Snakbar = (props) => {
   const [Display, setDisplay] = useState(false)
   useEffect(() => {
     let timer
-    if (props.getState.appStatus.length > 0) {
+    if (props.getState.length > 0) {
       setDisplay(true)
       timer = setTimeout(dontshow, 3000)
     }
@@ -14,7 +14,7 @@ const Snakbar = (props) => {
       setDisplay(false)
       clearTimeout(timer)
     }
-  }, [props.getState.appStatus.length])
+  }, [props.getState.length])
 
   const dontshow = () => {
     props.clear()
@@ -26,7 +26,7 @@ const Snakbar = (props) => {
         <>
           <div className="snakbarcontainer">
             <button onClick={dontshow} className="closebutton">&#10008;</button>
-            <h4 className="h1class">{props.getState.appStatus}</h4>
+            <h4 className="h1class">{props.getState}</h4>
           </div>
         </>
       }
@@ -35,7 +35,7 @@ const Snakbar = (props) => {
 }
 
 const mapstatetoprops = (state) => ({
-  getState: state
+  getState: state.appStatus
 })
 
 const mapdispatchtoprops = (dispatch) => ({

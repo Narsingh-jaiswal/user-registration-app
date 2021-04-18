@@ -90,13 +90,17 @@ const Formcomponent = (props) => {
   }
 
   const onUpdate = () => {
-    props.updateUser(user)
-    setUser({
-      name: '',
-      age: '',
-      contact: '',
-      email: '',
-    })
+    if (user.contact.length === 10) {
+      props.updateUser(user)
+      setUser({
+        name: '',
+        age: '',
+        contact: '',
+        email: '',
+      })
+    } else {
+      setValidation({ ...Validation, contactValidation: "contact number should contain 10 digits" })
+    }
   }
 
   return (
