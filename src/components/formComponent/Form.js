@@ -4,13 +4,15 @@ import { updateUser, cancelEdit } from '../../redux-app/Action/editAction'
 import registerUser from '../../redux-app/Action/registerUserAction'
 import SnakBar from '../snakBarComponent/SnakBar'
 import "./Form.css"
+import { ageValidation, contactValidation } from './validation'
 const Formcomponent = (props) => {
-  const [user, setUser] = useState({
+  const initialUser = {
     name: '',
     age: '',
     contact: '',
     email: '',
-  })
+  }
+  const [user, setUser] = useState(initialUser)
 
   useEffect(() => {
     if (props.Mode.type === "EditMode")
@@ -19,6 +21,7 @@ const Formcomponent = (props) => {
       props.clear()
     }
   }, [])
+  
   const [Validation, setValidation] = useState({
     contactValidation: '',
     ageValidation: ''
@@ -28,76 +31,21 @@ const Formcomponent = (props) => {
     event.preventDefault()
     if (user.contact.length === 10) {
       props.userRegistrationDispatch(user)
-      setUser({
-        name: '',
-        age: '',
-        contact: '',
-        email: '',
-      })
+      setUser(initialUser)
     } else {
       setValidation({ ...Validation, contactValidation: "contact number should contain 10 digits" })
     }
   }
 
-  const contactValidation = (event) => {
-    if (isNaN(event.target.value)) {
-      setValidation({
-        ...Validation,
-        contactValidation: 'only numbers accepted'
-      })
-    } else if (user.contact.length >= 10) {
-      setValidation({
-        ...Validation,
-        contactValidation: 'out of range'
-      })
-      setUser({
-        ...user,
-        contact: parseInt(user.contact / 10),
-      })
-    } else {
-      setValidation({
-        ...Validation,
-        contactValidation: ''
-      })
-      setUser({
-        ...user, contact: event.target.value.trimStart()
-      })
-    }
-  }
-
-  const ageValidation = (event) => {
-    if (isNaN(event.target.value)) {
-      setValidation({
-        ...Validation,
-        ageValidation: 'only numbers accepted'
-      })
-    } else {
-      setValidation('')
-      setUser({
-        ...user, age: event.target.value.trimStart()
-      })
-    }
-  }
-
   const onCancel = () => {
     props.cancelEdit()
-    setUser({
-      name: '',
-      age: '',
-      contact: '',
-      email: '',
-    })
+    setUser(initialUser)
   }
 
   const onUpdate = () => {
     if (user.contact.length === 10) {
       props.updateUser(user)
-      setUser({
-        name: '',
-        age: '',
-        contact: '',
-        email: '',
-      })
+      setUser(initialUser)
     } else {
       setValidation({ ...Validation, contactValidation: "contact number should contain 10 digits" })
     }
@@ -122,7 +70,7 @@ const Formcomponent = (props) => {
           <input
             value={user.age}
             className="form-input"
-            onChange={ageValidation}
+            onChange={(event) => ageValidation(event, setValidation, Validation, setUser, user)}
             placeholder="21" required />
           <label className="error">{Validation.ageValidation}</label>
 
@@ -130,7 +78,7 @@ const Formcomponent = (props) => {
           <input
             value={user.contact}
             className="form-input"
-            onChange={contactValidation}
+            onChange={(event) => contactValidation(event, setValidation, Validation, setUser, user)}
             placeholder="8349322226" required />
           <label className="error">{Validation.contactValidation}</label>
 

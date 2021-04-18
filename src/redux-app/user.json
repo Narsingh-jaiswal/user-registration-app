@@ -1,3 +1,11 @@
 {
-  "user": []
+  "user": [
+    {
+      "name": "Narsingh",
+      "age": "20",
+      "contact": "8349377776",
+      "email": "n@n.com",
+      "id": 1
+    }
+  ]
 }
