@@ -42,6 +42,7 @@ const DesccompareFunctionbyemail = (first, second) => {
 }
 
 const getUserAction = (SortBy) => (dispatch, getState) => {
+  console.log(SortBy.valueOf());
   axios.get("http://localhost:8000/user").then(
     (user) => {
       const users = user.data
@@ -88,6 +89,7 @@ const getUserAction = (SortBy) => (dispatch, getState) => {
           ascendingValue: false
         })
       } else {
+        console.log("else chala");
         if (sortStatus.ascending) {
           Ascending()
           dispatch({
@@ -137,6 +139,7 @@ const getUserAction = (SortBy) => (dispatch, getState) => {
       }
     },
     (error) => {
+      alert(error.message)
     }
   )
 }

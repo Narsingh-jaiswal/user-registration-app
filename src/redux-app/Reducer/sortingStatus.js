@@ -1,5 +1,5 @@
 const initialSortStatus = {
-  previousSortBy: "",
+  previousSortBy: null,
   ascending: false,
   imgUrl: ""
 }
