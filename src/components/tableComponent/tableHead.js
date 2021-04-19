@@ -6,91 +6,115 @@ export const tableHead = (dispatchGetUser, getState) => {
           className="action-btn"
           onClick={() => dispatchGetUser("")}>
           #
-      </button>
+        </button>
       </th>
       <th className="table-head">
-        {
-          (getState.sortStatus.previousSortBy === "name" && !getState.sortStatus.ascending) &&
-          <img
-            className="arrow-img"
-            src="https://www.flaticon.com/svg/vstatic/svg/545/545678.svg?token=exp=1618688775~hmac=2cef2b3fbc1161f5752e66d5beb3d4f1"
-            alt="ascending descending img url" />
-        }
-        <button
-          className="action-btn"
-          onClick={() => dispatchGetUser("name")}>
-          Name
-      </button>
-        {
-          (getState.sortStatus.previousSortBy === "name" && getState.sortStatus.ascending) &&
-          < img className="arrow-img" src={getState.sortStatus.imgUrl} alt="ascending descending img url" />
-        }
+        <div className="head-data-container">
+          <div className="descending-order">
+            {
+              (getState.sortStatus.previousSortBy === "name" && !getState.sortStatus.ascending) &&
+              <img
+                className="arrow-img"
+                src="https://www.flaticon.com/svg/vstatic/svg/545/545678.svg?token=exp=1618688775~hmac=2cef2b3fbc1161f5752e66d5beb3d4f1"
+                alt="ascending descending img url" />
+            }
+          </div>
+          <button
+            className="action-btn"
+            onClick={() => dispatchGetUser("name")}>
+            Name
+        </button>
+          <div className="ascendin-order">
+            {
+              (getState.sortStatus.previousSortBy === "name" && getState.sortStatus.ascending) &&
+              < img className="arrow-img" src={getState.sortStatus.imgUrl} alt="ascending descending img url" />
+            }
+          </div>
+        </div>
       </th>
       <th className="table-head">
-        {
-          (getState.sortStatus.previousSortBy === "age" && !getState.sortStatus.ascending) &&
-          <img
-            className="arrow-img"
-            src="https://www.flaticon.com/svg/vstatic/svg/545/545678.svg?token=exp=1618688775~hmac=2cef2b3fbc1161f5752e66d5beb3d4f1"
-            alt="ascending descending img url" />
-        }
-        <button
-          className="action-btn"
-          onClick={() => dispatchGetUser("age")}>
-          age
-      </button>
-        {
-          (getState.sortStatus.previousSortBy === "age" && getState.sortStatus.ascending) &&
-          < img className="arrow-img" src={getState.sortStatus.imgUrl} alt="ascending descending img url" />
-        }
+        <div className="head-data-container">
+          <div className="descending-order">
+            {
+              (getState.sortStatus.previousSortBy === "age" && !getState.sortStatus.ascending) &&
+              <img
+                className="arrow-img"
+                src="https://www.flaticon.com/svg/vstatic/svg/545/545678.svg?token=exp=1618688775~hmac=2cef2b3fbc1161f5752e66d5beb3d4f1"
+                alt="ascending descending img url" />
+            }
+          </div>
+          <button
+            className="action-btn"
+            onClick={() => dispatchGetUser("age")}>
+            age
+        </button>
+          <div className="ascendin-order">
+            {
+              (getState.sortStatus.previousSortBy === "age" && getState.sortStatus.ascending) &&
+              < img className="arrow-img" src={getState.sortStatus.imgUrl} alt="ascending descending img url" />
+            }
+          </div>
+        </div>
       </th>
       <th className="table-head">
-        {
-          (getState.sortStatus.previousSortBy === "email" && !getState.sortStatus.ascending) &&
-          <img
-            className="arrow-img"
-            src="https://www.flaticon.com/svg/vstatic/svg/545/545678.svg?token=exp=1618688775~hmac=2cef2b3fbc1161f5752e66d5beb3d4f1"
-            alt="ascending descending img url" />
-        }
-        <button
-          className="action-btn"
-          onClick={() => dispatchGetUser("email")}>
-          email
-      </button>
-        {
-          (getState.sortStatus.previousSortBy === "email" && getState.sortStatus.ascending) &&
-          < img className="arrow-img" src={getState.sortStatus.imgUrl} alt="ascending descending img url" />
-        }
+        <div className="head-data-container">
+          <div className="descending-order">
+            {
+              (getState.sortStatus.previousSortBy === "email" && !getState.sortStatus.ascending) &&
+              <img
+                className="arrow-img"
+                src="https://www.flaticon.com/svg/vstatic/svg/545/545678.svg?token=exp=1618688775~hmac=2cef2b3fbc1161f5752e66d5beb3d4f1"
+                alt="ascending descending img url" />
+            }
+          </div>
+          <button
+            className="action-btn"
+            onClick={() => dispatchGetUser("email")}>
+            email
+        </button>
+          <div className="ascendin-order">
+            {
+              (getState.sortStatus.previousSortBy === "email" && getState.sortStatus.ascending) &&
+              < img className="arrow-img" src={getState.sortStatus.imgUrl} alt="ascending descending img url" />
+            }
+          </div>
+        </div>
       </th>
       <th className="table-head">
-        {
-          (getState.sortStatus.previousSortBy === "contact" && !getState.sortStatus.ascending) &&
-          <img
-            className="arrow-img"
-            src="https://www.flaticon.com/svg/vstatic/svg/545/545678.svg?token=exp=1618688775~hmac=2cef2b3fbc1161f5752e66d5beb3d4f1"
-            alt="ascending descending img url" />
-        }
-        <button
-          className="action-btn"
-          onClick={() => dispatchGetUser("contact")}>
-          contact
-      </button>
-        {
-          (getState.sortStatus.previousSortBy === "contact" && getState.sortStatus.ascending) &&
-          < img className="arrow-img" src={getState.sortStatus.imgUrl} alt="ascending descending img url" />
-        }
+        <div className="head-data-container">
+          <div className="descending-order">
+            {
+              (getState.sortStatus.previousSortBy === "contact" && !getState.sortStatus.ascending) &&
+              <img
+                className="arrow-img"
+                src="https://www.flaticon.com/svg/vstatic/svg/545/545678.svg?token=exp=1618688775~hmac=2cef2b3fbc1161f5752e66d5beb3d4f1"
+                alt="ascending descending img url" />
+            }
+          </div>
+          <button
+            className="action-btn"
+            onClick={() => dispatchGetUser("contact")}>
+            contact
+        </button>
+          <div className="ascendin-order">
+            {
+              (getState.sortStatus.previousSortBy === "contact" && getState.sortStatus.ascending) &&
+              < img className="arrow-img" src={getState.sortStatus.imgUrl} alt="ascending descending img url" />
+            }
+          </div>
+        </div>
       </th>
       <th className="table-head">
         <button
           className="action-btn">
           edit
-      </button>
+        </button>
       </th>
       <th className="table-head">
         <button
           className="action-btn">
           delete
-      </button>
+        </button>
       </th>
     </tr>
   )

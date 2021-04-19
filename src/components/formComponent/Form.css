@@ -39,6 +39,10 @@
   border: 1px solid #cecece;
 }
 
+.Field-is-required {
+  border-color: lightcoral;
+}
+
 .form-submit-button {
   padding: 5px;
   width: 50%;

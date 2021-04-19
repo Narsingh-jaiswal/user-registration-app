@@ -4,13 +4,19 @@ import { updateUser, cancelEdit } from '../../redux-app/Action/editAction'
 import registerUser from '../../redux-app/Action/registerUserAction'
 import SnakBar from '../snakBarComponent/SnakBar'
 import "./Form.css"
-import { ageValidation, contactValidation } from './validation'
+import { ageValidation, checkEmpty, contactValidation } from './validation'
 const Formcomponent = (props) => {
   const initialUser = {
     name: '',
     age: '',
     contact: '',
     email: '',
+  }
+  const initialValidation = {
+    nameValidation: '',
+    ageValidation: '',
+    contactValidation: '',
+    emailValidation: ''
   }
   const [user, setUser] = useState(initialUser)
 
@@ -21,36 +27,39 @@ const Formcomponent = (props) => {
       props.clear()
     }
   }, [])
-  
-  const [Validation, setValidation] = useState({
-    contactValidation: '',
-    ageValidation: ''
-  })
+
+  const [Validation, setValidation] = useState(initialValidation)
 
   const FormSubmit = (event) => {
     event.preventDefault()
-    if (user.contact.length === 10) {
-      props.userRegistrationDispatch(user)
-      setUser(initialUser)
-    } else {
-      setValidation({ ...Validation, contactValidation: "contact number should contain 10 digits" })
-    }
+    if (user.name && user.age && user.contact && user.email) {
+      if (user.contact.length === 10) {
+        props.userRegistrationDispatch(user)
+        setUser(initialUser)
+        setValidation(initialValidation)
+      } else {
+        setValidation({ ...Validation, contactValidation: "contact number should contain 10 digits" })
+      }
+    } else checkEmpty(user, setValidation)
   }
 
   const onCancel = () => {
     props.cancelEdit()
     setUser(initialUser)
+    setValidation(initialValidation)
   }
 
   const onUpdate = () => {
-    if (user.contact.length === 10) {
-      props.updateUser(user)
-      setUser(initialUser)
-    } else {
-      setValidation({ ...Validation, contactValidation: "contact number should contain 10 digits" })
-    }
+    if (user.name && user.age && user.contact && user.email) {
+      if (user.contact.length === 10) {
+        props.updateUser(user)
+        setUser(initialUser)
+        setValidation(initialValidation)
+      } else {
+        setValidation({ ...Validation, contactValidation: "contact number should contain 10 digits" })
+      }
+    } else checkEmpty(user, setValidation)
   }
-
   return (
     <>
       <div className="form-container">
@@ -60,37 +69,40 @@ const Formcomponent = (props) => {
           <label className="form-label">Name</label>
           <input
             value={user.name}
-            className="form-input"
+            className={"form-input " + Validation.nameValidation}
             onChange={(event) => setUser({
               ...user, name: event.target.value.trimStart()
             })}
-            placeholder="Your Name" required />
+            placeholder="Your Name" />
+          <label className="error">{Validation.nameValidation}</label>
 
           <label className="form-label">age</label>
           <input
             value={user.age}
-            className="form-input"
+            className={"form-input " + Validation.ageValidation}
             onChange={(event) => ageValidation(event, setValidation, Validation, setUser, user)}
-            placeholder="21" required />
+            placeholder="21" />
           <label className="error">{Validation.ageValidation}</label>
 
           <label className="form-label">Contact</label>
           <input
             value={user.contact}
-            className="form-input"
+            className={"form-input " + Validation.contactValidation}
             onChange={(event) => contactValidation(event, setValidation, Validation, setUser, user)}
-            placeholder="8349322226" required />
+            placeholder="8349322226" />
           <label className="error">{Validation.contactValidation}</label>
 
           <label className="form-label">email</label>
           <input
             value={user.email}
-            className="form-input"
+            className={"form-input " + Validation.emailValidation}
             type="email"
             onChange={(event) => setUser({
               ...user, email: event.target.value.trimStart()
             })}
-            placeholder="example.gmail.com" required />
+            placeholder="example.gmail.com" />
+          <label className="error">{Validation.emailValidation}</label>
+
           {
             props.Mode.type !== "EditMode" &&
             <button className="form-submit-button" type="submit">Submit</button>

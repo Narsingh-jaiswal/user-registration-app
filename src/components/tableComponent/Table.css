@@ -16,7 +16,9 @@
 
 .table-data {
   padding: 10px;
+  padding-left: 6px;
   margin: 0%;
+  margin-left: 15px;
 }
 
 .main-table-head {
@@ -28,6 +30,19 @@
   padding: 5px 0px;
   color: #fff;
   text-align: left;
+}
+
+.head-data-container {
+  display: flex;
+  align-items: center;
+}
+
+.ascendin-order {
+  min-width: 15px;
+}
+
+.descending-order {
+  min-width: 15px;
 }
 
 .tbody {

@@ -24,16 +24,36 @@ export const contactValidation = (event, setValidation, Validation, setUser, use
   }
 }
 
-export const ageValidation = (event,setValidation,Validation,setUser,user) => {
+export const ageValidation = (event, setValidation, Validation, setUser, user) => {
   if (isNaN(event.target.value)) {
     setValidation({
       ...Validation,
       ageValidation: 'only numbers accepted'
     })
   } else {
-    setValidation('')
+    setValidation({
+      ...Validation,
+      ageValidation: ''
+    })
     setUser({
       ...user, age: event.target.value.trimStart()
     })
   }
+}
+
+export const checkEmpty = (user, setValidation) => {
+  let error = {}
+  if (!user.email) {
+    error.emailValidation = "Field-is-required"
+  }
+  if (!user.contact) {
+    error.contactValidation = "Field-is-required"
+  }
+  if (!user.age) {
+    error.ageValidation = "Field-is-required"
+  }
+  if (!user.name) {
+    error.nameValidation = "Field-is-required"
+  }
+  setValidation(error)
 }
