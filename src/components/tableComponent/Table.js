@@ -4,9 +4,9 @@ import deleteAction from '../../redux-app/Action/deleteUser';
 import { edit } from '../../redux-app/Action/editAction';
 import getUserAction from '../../redux-app/Action/getUserAction';
 import Snakbar from "./../snakBarComponent/SnakBar";
-import "./Table.css"
 import { TableBody } from './tableBody';
 import { tableHead } from './tableHead';
+import "./Table.css"
 
 const Tablecomponent = (props) => {
   useEffect(() => {

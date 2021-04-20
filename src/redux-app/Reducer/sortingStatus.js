@@ -1,3 +1,4 @@
+import { changeAscendingValue } from "./../Constants";
 const initialSortStatus = {
   previousSortBy: null,
   ascending: false,
@@ -5,7 +6,7 @@ const initialSortStatus = {
 }
 const sortStatus = (state = initialSortStatus, action) => {
   switch (action.type) {
-    case "changeAscendingValue":
+    case changeAscendingValue:
       return ({
         previousSortBy: action.sortBy,
         ascending: action.ascendingValue,
