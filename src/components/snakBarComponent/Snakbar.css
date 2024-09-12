@@ -1,0 +1,38 @@
+.snakbarcontainer {
+  position: relative;
+  border: 1px solid #cecece;
+  margin: auto;
+  margin-top: 10px;
+  width: fit-content;
+  padding: 20px;
+  padding-right: 30px;
+  border-radius: 5px;
+  background-image: linear-gradient(133deg, #667eea, #764ba2) !important;
+  animation: h1classAnimation 1s ease-in-out 0s;
+}
+
+.h1class {
+  font-family: cursive;
+  color: whitesmoke;
+  margin: 0%;
+}
+
+@keyframes h1classAnimation {
+  from {
+    transform: translateY(50px);
+  }
+
+  to {
+    transform: translateY(0px);
+  }
+}
+
+.closebutton {
+  background-color: transparent;
+  width: fit-content;
+  border: none;
+  color: whitesmoke;
+  position: absolute;
+  right: 5px;
+  top: 2px;
+}
